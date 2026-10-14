@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f2">
+  <title>PostureXpert | Live assessment</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="PostureXpert home"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>posture<span class="brand-light">xpert</span></span></a>
+    <div class="topbar-right"><span class="privacy"><span class="privacy-dot"></span>Camera stays on this device</span><span class="top-divider"></span><span class="clock" id="clock">--:--</span></div>
+  </header>
+  <main class="app-shell">
+    <section class="page-heading">
+      <div><div class="eyebrow"><span class="eyebrow-line"></span>POSTURE LAB <span class="eyebrow-index">/ 01</span></div><h1>Live assessment</h1><p class="subhead">Find your natural alignment. Build a better baseline.</p></div>
+      <div class="session-chip"><span class="session-dot"></span><span id="session-label">SESSION READY</span><span class="session-time" id="session-time">00:00</span></div>
+    </section>
+    <section class="workspace" aria-label="Live posture assessment">
+      <div class="camera-column">
+        <div class="camera-toolbar"><div class="toolbar-label"><span class="live-indicator" id="live-indicator"></span><span id="camera-state">CAMERA STANDBY</span></div><div class="view-control" role="group" aria-label="Camera angle"><button class="view-button is-active" type="button" data-view="front" aria-pressed="true">Front</button><button class="view-button" type="button" data-view="side" aria-pressed="false">Side</button></div></div>
+        <div class="camera-stage" id="camera-stage">
+          <video id="camera" autoplay playsinline muted></video><canvas id="overlay"></canvas><div class="stage-grid" aria-hidden="true"></div><div class="stage-corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="camera-placeholder" id="camera-placeholder"><div class="placeholder-icon" aria-hidden="true"><span></span><span></span><span></span></div><div class="placeholder-title">Make room for your full posture</div><p>Position your camera at eye level, then stand<br>back until your head and hips are in frame.</p><button class="start-button" id="start-button" type="button"><span class="camera-glyph" aria-hidden="true"></span>Start assessment</button><span class="camera-note">Your camera feed is processed locally</span></div>
+          <div class="stage-top-left"><span class="rec-dot"></span><span id="record-label">STANDBY</span></div><div class="stage-top-right" id="pose-confidence">POSE --%</div><div class="stage-bottom-left">FULL BODY · NATURAL STANCE</div><div class="stage-bottom-right"><span class="focus-cross">+</span>640 × 480</div><div class="frame-message" id="frame-message" role="status" aria-live="polite"></div>
+        </div>
+        <div class="camera-footer"><div class="camera-hint"><span class="hint-mark">i</span><span id="camera-hint">Stand relaxed, feet hip-width apart. Keep your head and hips visible.</span></div><button class="end-button" id="end-button" type="button" disabled><span class="stop-square" aria-hidden="true"></span>End session</button></div>
+      </div>
+      <aside class="analysis-column" aria-label="Posture analysis results">
+        <div class="analysis-header"><div><div class="eyebrow small-eyebrow">ASSESSMENT</div><h2>Alignment score</h2></div><span class="result-tag" id="result-tag"><span class="tag-dot"></span>WAITING</span></div>
+        <div class="score-block"><div class="score-value" id="score-value">--<span>/100</span></div><div class="score-caption" id="score-caption">Start a session to see your alignment</div><div class="score-track"><span id="score-track-fill"></span></div><div class="score-scale"><span>NEEDS ATTENTION</span><span>ON TRACK</span></div></div>
+        <div class="readout-heading"><span>KEY ALIGNMENTS</span><span class="unit-note">DEGREES / %</span></div>
+        <div class="readout-list">
+          <div class="readout-row"><span class="readout-symbol head-symbol" aria-hidden="true">↕</span><div class="readout-name"><strong>Head position</strong><span id="head-note">Awaiting detection</span></div><span class="readout-value" id="head-value">--</span></div>
+          <div class="readout-row"><span class="readout-symbol torso-symbol" aria-hidden="true">∠</span><div class="readout-name"><strong>Torso lean</strong><span id="torso-note">Awaiting detection</span></div><span class="readout-value" id="torso-value">--</span></div>
+          <div class="readout-row"><span class="readout-symbol balance-symbol" aria-hidden="true">≋</span><div class="readout-name"><strong>Shoulder level</strong><span id="shoulder-note">Front view only</span></div><span class="readout-value" id="shoulder-value">--</span></div>
+        </div>
+        <div class="feedback-panel" id="feedback-panel"><div class="feedback-icon" id="feedback-icon" aria-hidden="true">↗</div><div><div class="feedback-title" id="feedback-title">Ready when you are</div><p id="feedback-copy">Start your camera to receive real-time alignment feedback.</p></div></div>
+        <div class="analysis-foot"><span class="processing-mark"></span><span id="runtime-label">CHECKING VISION ENGINE</span><span class="engine-version">POSE / 01</span></div>
+      </aside>
+    </section>
+    <section class="session-strip" aria-label="Session summary"><div class="strip-heading"><span>SESSION SNAPSHOT</span><span class="snapshot-date" id="snapshot-date">TODAY</span></div><div class="snapshot-items">
+      <div class="snapshot-item"><span class="snapshot-label">TIME IN SESSION</span><strong id="snapshot-time">00:00</strong><span class="snapshot-detail">active assessment</span></div><div class="snapshot-item"><span class="snapshot-label">ALIGNED FRAMES</span><strong id="snapshot-aligned">0</strong><span class="snapshot-detail">score ≥ 82</span></div><div class="snapshot-item"><span class="snapshot-label">ADJUSTMENTS</span><strong id="snapshot-adjustments">0</strong><span class="snapshot-detail">feedback moments</span></div><div class="snapshot-note"><span class="note-rule"></span><span>Small corrections, repeated often,<br>are easier to keep than perfect posture.</span><span class="note-mark">PX—01</span></div>
+    </div></section>
+    <footer class="page-footer"><span>POSTUREXPERT <span class="footer-separator">/</span> PERSONAL ALIGNMENT TOOL</span><span>NOT A MEDICAL DIAGNOSIS</span></footer>
+  </main>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
